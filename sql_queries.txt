@@ -87,3 +87,106 @@ insert into part (name)
 values ("Inductor-s4w");
 
 
+insert into product (name, quantity, cost, warehouse_id)
+values ("GPU-AX3", 300, 200.0, 2);
+
+insert into product (name, quantity, cost, warehouse_id)
+values ("GPU-S2", 300, 400.0, 2);
+
+insert into product (name, quantity, cost, warehouse_id)
+values ("GPU-32V", 457, 300.0, 1);
+
+insert into product (name, quantity, cost, warehouse_id)
+values ("GPU-AS2", 1006, 500.0, 3);
+
+insert into product (name, quantity, cost, warehouse_id)
+values ("GPU-1GE", 249, 400.0, 2);
+
+insert into product (name, quantity, cost, warehouse_id)
+values ("MOTHERBOARD-2A2", 552, 300.0, 5);
+
+insert into product (name, quantity, cost, warehouse_id)
+values ("MOTHERBOARD-20S", 658, 250.0, 6);
+
+
+insert into parts_in_product(product_id, part_id)
+values (1, 2);
+
+insert into parts_in_product(product_id, part_id)
+values (1, 4);
+
+insert into parts_in_product(product_id, part_id)
+values (2, 5);
+
+insert into parts_in_product(product_id, part_id)
+values (2, 4);
+
+insert into parts_in_product(product_id, part_id)
+values (2, 1);
+
+insert into parts_in_product(product_id, part_id)
+values (3, 5);
+
+insert into parts_in_product(product_id, part_id)
+values (3, 6);
+
+insert into parts_in_product(product_id, part_id)
+values (4, 1);
+
+insert into parts_in_product(product_id, part_id)
+values (4, 2);
+
+insert into parts_in_product(product_id, part_id)
+values (5, 2);
+
+insert into parts_in_product(product_id, part_id)
+values (5, 6);
+
+insert into parts_in_product(product_id, part_id)
+values (6, 3);
+
+insert into parts_in_product(product_id, part_id)
+values (6, 2);
+
+insert into parts_in_product(product_id, part_id)
+values (7, 6);
+
+insert into parts_in_product(product_id, part_id)
+values (7, 3);
+
+
+insert into employee (name, salary, warehouse_id)
+values ("John Smith", 50000, 1);
+
+insert into employee (name, salary, warehouse_id)
+values ("Gary Bar", 65000, 1);
+
+insert into employee (name, salary, warehouse_id)
+values ("Ken Cook", 200000, 2);
+
+insert into employee (name, salary, warehouse_id)
+values ("Luis Davis", 145000, 3);
+
+insert into employee (name, salary, warehouse_id)
+values ("Sue Williams", 90000, 4);
+
+insert into employee (name, salary, warehouse_id)
+values ("Gina White", 75000, 5);
+
+insert into employee (name, salary, warehouse_id)
+values ("Jim Jones", 80000, 6);
+
+insert into employee (name, salary, warehouse_id)
+values ("Larry Walters", 140000, 5);
+
+insert into employee (name, salary, warehouse_id)
+values ("Bob Johnson", 125000, 5);
+
+insert into employee (name, salary, warehouse_id)
+values ("Hugh Lopez", 82000, 1);
+
+insert into employee (name, salary, warehouse_id)
+values ("Joe Taylor", 160000, 3);
+
+insert into employee (name, salary, warehouse_id)
+values ("Alice Jackson", 101000, 4);
