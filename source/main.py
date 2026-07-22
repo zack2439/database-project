@@ -1,4 +1,5 @@
 import sqlite3
+from pathlib import Path
 from tabulate import tabulate
 # Queries
 GET_ALL_WAREHOUSES = '''select * from warehouse'''
@@ -7,13 +8,13 @@ GET_ALL_PARTS = '''select * from part'''
 GET_ALL_EMPLOYEES = '''select * from employee'''
 GET_EMPLOYEES_WITH_GREATER_AVG_SALARY = '''select * from employee where salary > 
                                             (select avg(salary) from employee)'''
-
+db_dir = str(Path(__file__).resolve().parent.parent) + '/inventory.db'
 # TODO: Query that shows products that are being handled by a particular employee
 # TODO: Code cleanup, make print table more readable
 # TODO: Add product insertion and more queries
 
 # Create connection to db
-connection = sqlite3.connect('inventory.db')
+connection = sqlite3.connect(db_dir)
 cur = connection.cursor()
 
 
