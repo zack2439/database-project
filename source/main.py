@@ -1,4 +1,5 @@
 import sqlite3
+from tabulate import tabulate
 # Queries
 GET_ALL_WAREHOUSES = '''select * from warehouse'''
 GET_ALL_PRODUCTS = '''select * from product'''
@@ -18,18 +19,8 @@ cur = connection.cursor()
 
 # Helper
 def print_table(data, attr_names):
-    if not data:
-        print("Empty table - error.")
-    # Headers
-    for attr in attr_names:
-        print(attr, end='    ')
+    print(tabulate(data, headers=attr_names, tablefmt="fancy_grid"))
 
-    print('\n')
-    # Columns
-    for row in data:
-        for value in row:
-            print(value, end='  |  ')
-        print('\n')
 
 def get_attr_names(cursor):
     return [description[0] for description in cursor.description]
@@ -72,7 +63,7 @@ def interface():
             res = cur.execute(GET_ALL_WAREHOUSES)
             print_table(res.fetchall(), get_attr_names(cur))
             
-            warehouse = input("Warehouse id: ")
+            warehouse = int(input("Warehouse id: "))
 
             # Printing out parts because each product must have parts, 
             # this relationship will be inserted into product/part rel table
@@ -80,7 +71,23 @@ def interface():
             res = cur.execute(GET_ALL_PARTS)
             print_table(res.fetchall(), get_attr_names(cur))
 
-            pass
+            parts = input("Enter part ids separated by commas: ")
+            parts = [int(x.strip()) for x in parts.split(',')]
+            # Make sure product is being added with parts
+            print('asd')
+            if not parts:
+                print("You must select at least one part.")
+                continue
+            # Insert into product table and parts_in_product rel table
+            try:
+                cur.execute(f'insert into product (name, quantity, cost, warehouse_id) values ("{name}", {quantity}, {cost}, {warehouse})')
+                last_product_id = cur.lastrowid
+                for part_id in parts:
+                    cur.execute(f'insert into parts_in_product (product_id, part_id) values ({last_product_id}, {part_id})')
+                connection.commit()
+            except:
+                print("Error inserting product, please check your inputs.")
+                continue
 
         elif command.lower() == '2':
             # View all products in the inventory, 
@@ -88,7 +95,7 @@ def interface():
             res = cur.execute(GET_ALL_PRODUCTS)
             print_table(res.fetchall(), get_attr_names(cur))
 
-            chosen_product = input("Select a product by id to view its details: ")
+            chosen_product = int(input("Select a product by id to view its details: "))
             print("1. View parts associated with this product")
             print("2. View warehouse associated with this product")
             choice = input("Enter your choice (1-2): ")
@@ -108,8 +115,11 @@ def interface():
             # you can then select an employee to view
             res = cur.execute(GET_ALL_EMPLOYEES)
             print_table(res.fetchall(), get_attr_names(cur))
-
-            pass
+            print("Select an employee by id to view their warehouse details:")
+            chosen_employee = int(input("Enter employee id: "))
+            # View details for the selected employee
+            res = cur.execute(f"select * from warehouse where warehouse_id in (select warehouse_id from employee where employee_id = {chosen_employee})")
+            print_table(res.fetchall(), get_attr_names(cur))
 
         elif command.lower() == '4':
             # Special Queries
